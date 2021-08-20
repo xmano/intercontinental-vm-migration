@@ -4,6 +4,8 @@ Intercontinental VM Migration using Storage Snapshot through GCP Internal Privat
 
 # Contributors
 
-<a href = "https://github.com/xmano/intercontinental-vm-migration">
-  <img src = "https://contrib.rocks/image?repo = xmano/intercontinental-vm-migration"/>
+<a href="https://github.com/xmano/intercontinental-vm-migration/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=xmano/intercontinental-vm-migration" />
 </a>
+
+Made with [contributors-img](https://contrib.rocks).
