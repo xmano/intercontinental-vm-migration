@@ -1,0 +1,60 @@
+A> Provisioning
+
+1. Create 2 VM instances
+
+2. Firewall
+
+
+
+
+Name: allow-app-port-3000
+Targets: Allinstancesinthenetwork
+Source IP ranges: 0.0.0.0/0
+SelectTCPandtheport 3000
+ClickonCreatehost:tothePrivate IP address of the vmusa-db01.
+user:to app,
+password: to welcome1
+database: to clinic
+
+And save the file!
+
+From bootcamp-gcp-storage-clinic-mid-app folder,
+ run the command below to install the NPM package:
+ 
+npm install
+
+Start the Node.js application:
+
+node src/index.js
+
+B> DB Install & Create 
+
+mysql -u root -p 
+   (password welcome1)
+
+source bootcamp-gcp-storage-db-en.sql
+
+
+Creating an user and changing the privileges
+--------------------------------------------
+CREATE USER app@'%' IDENTIFIED BY 'welcome1';
+GRANT ALL PRIVILEGES ON clinic.* TO app@'%';
+FLUSH PRIVILEGES;
+exit
+
+
+Setting up the VM for the Application
+-------------------------------------
+mkdir vm
+
+Updating the OS and the packages
+
+sudo apt-get update
+sudo apt-get install -y npm
+sudo apt-get install -y zip
+sudo apt-get install -y wget
+
+Creating and accessing the folder to download application files (Node.js)
+
+wget https://storage.googleapis.com/bootcamp-gcp-en/bootcamp-gcp-storage-clinic-mid-app.zipunzip bootcamp-gcp-storage-clinic-mib-app.zipcd bootcamp-gcp-storage-clinic-mib-appFromthefolderbootcamp-gcp-storage-clinic-mid-app,runthefollowingcommandtoeditthefileindex.jsnano src/index.jsOnceinsideofthefileindex.js, intheMiddlewaressection,replace:
+
