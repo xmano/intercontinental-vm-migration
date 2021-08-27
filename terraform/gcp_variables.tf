@@ -52,27 +52,14 @@ variable "gcp_disk_image" {
   default     = "debian-cloud/debian-10"
 }
 
-variable "gcp_network_cidr" {
-  default = "10.88.0.0/16"
-}
-
-variable "gcp_subnet1_cidr" {
-  default = "10.88.0.0/24"
-}
-
-variable "gcp_vm_address" {
-  description = "Private IP address for GCP VM instance."
-  default     = "10.88.0.100"
-}
-
 variable "gce_ssh_pub_key_file" {
   description = "Location of SSH public key file"
-  default     = "~/.ssh/id_rsa.pub"
+  default     = "~/.ssh/vm-ssh-key.pub"
 }
 
 variable "gce_ssh_user" {
   description = "User loggin in via SSH - username"
-  default     = "xkandacloud"
+  default     = "supermano"
 }
 
 

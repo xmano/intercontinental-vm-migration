@@ -11,8 +11,7 @@
  */
 
 resource "google_compute_network" "i18n-gcp-network" {
-  name                    = "i18n-gcp-network"
-  auto_create_subnetworks = "false"
+  name  = "i18n-gcp-network"
 }
 
 resource "google_compute_address" "gcp-ip" {

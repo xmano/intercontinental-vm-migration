@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,8 +15,8 @@ data "google_compute_zones" "available" {
   region = var.gcp_region
 }
 
-
-
+/*
+// Migration completed!
 //------- Source VMs------------------------------------
 
 
@@ -44,7 +44,8 @@ resource "google_compute_instance" "usa-app-01" {
     network = "default"
 
     access_config {
-      // Include this section to give the VM an external ip address
+      # Static IP
+      nat_ip = google_compute_address.gcp-ip.address
     }
   }
 }
@@ -79,6 +80,7 @@ resource "google_compute_instance" "usa-db-01" {
     }
   }
 }
+*/
 
 /*
  * -----------------------------------------------------------------
@@ -93,7 +95,7 @@ resource "google_compute_snapshot" "usa-app01-snapshot" {
   }
   storage_locations = [var.gcp_region]
 }
-
+*/
 
 // Step 3 : Created destination VMs
 // Initially these resources are turned off until disks are created.
@@ -110,10 +112,12 @@ resource "google_compute_instance" "aus-app-01" {
   machine_type = var.gcp_instance_type
   zone         = var.gcp_zone2
 
+  // Use an existing disk resource
   boot_disk {
-    initialize_params {
-      image = var.gcp_disk_image
-    }
+    // Instance Templates reference disks by name, not self link
+    source      = "aus-app-01"
+    auto_delete = false
+    //boot        = true
   }
 
   //Add some metada like SSH to VM 
@@ -122,7 +126,7 @@ resource "google_compute_instance" "aus-app-01" {
   }
 
   // Make sure flask is installed on all new instances for later steps
-  metadata_startup_script = "sudo apt-get update; sudo apt-get install -yq npm zip wget"
+  // metadata_startup_script = "sudo apt-get update; sudo apt-get install -yq npm zip wget"
 
   network_interface {
     network = "default"
@@ -142,10 +146,12 @@ resource "google_compute_instance" "aus-db-01" {
   machine_type = var.gcp_instance_type
   zone         = var.gcp_zone2
 
+  // Use an existing disk resource
   boot_disk {
-    initialize_params {
-      image = var.gcp_disk_image
-    }
+    // Instance Templates reference disks by name, not self link
+    source       = "aus-db-01"
+    auto_delete  = false
+    //boot         = true
   }
 
   //Add some metada like SSH to VM 
@@ -154,7 +160,7 @@ resource "google_compute_instance" "aus-db-01" {
   }
 
   // Make sure node & support packages is installed on all new instances for later steps
-  metadata_startup_script = "sudo apt-get update; sudo apt-get install -yq npm zip wget"
+  // metadata_startup_script = "sudo apt-get update; sudo apt-get install -yq npm zip wget"
 
   network_interface {
     network = "default"
@@ -165,5 +171,3 @@ resource "google_compute_instance" "aus-db-01" {
     }
   }
 }
-
-*/

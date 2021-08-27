@@ -13,7 +13,6 @@
  */
 
 provider "google" {
-  version = "~> 3.19.0"
 
   credentials = file(var.gcp_credentials_file_path)
 

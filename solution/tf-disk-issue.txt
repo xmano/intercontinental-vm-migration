@@ -1,0 +1,19 @@
+╷
+│ Error: Insufficient boot_disk blocks
+│
+│   on gcp_compute.tf line 110, in resource "google_compute_instance" "aus-app-01":
+│  110: resource "google_compute_instance" "aus-app-01" {
+│
+│ At least 1 "boot_disk" blocks are required.
+╵
+╷
+│ Error: Unsupported block type
+│
+│   on gcp_compute.tf line 116, in resource "google_compute_instance" "aus-app-01":
+│  116:   disk {
+│
+│ Blocks of type "disk" are not expected here.
+
+
+We need to boot from persistent disk
+

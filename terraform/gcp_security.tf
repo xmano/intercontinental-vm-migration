@@ -14,7 +14,7 @@
 # Allow SSH for iperf testing.
 resource "google_compute_firewall" "gcp-allow-ssh" {
   name    = "${google_compute_network.i18n-gcp-network.name}-gcp-allow-ssh"
-  network = google_compute_network.i18n-gcp-network.name
+  network = "default"
 
   allow {
     protocol = "tcp"
@@ -29,7 +29,7 @@ resource "google_compute_firewall" "gcp-allow-ssh" {
 # Allow TCP:3000 for App access
 resource "google_compute_firewall" "gcp-allow-tcp" {
   name    = "${google_compute_network.i18n-gcp-network.name}-allow-app-port-3000"
-  network = google_compute_network.i18n-gcp-network.name
+  network = "default"
 
   allow {
     protocol = "tcp"
@@ -40,5 +40,4 @@ resource "google_compute_firewall" "gcp-allow-tcp" {
     "0.0.0.0/0",
   ]
 }
-
 
