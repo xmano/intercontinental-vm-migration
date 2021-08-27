@@ -10,17 +10,29 @@
  * Terraform networking resources for GCP.
  */
 
-resource "google_compute_network" "tcb-gcp-network" {
-  name                    = "tcb-gcp-network"
+resource "google_compute_network" "i18n-gcp-network" {
+  name                    = "i18n-gcp-network"
   auto_create_subnetworks = "false"
 }
 
-resource "google_compute_subnetwork" "tcb-gcp-subnet1" {
-  name          = "tcb-gcp-subnet1"
-  ip_cidr_range = var.gcp_subnet1_cidr
-  network       = google_compute_network.tcb-gcp-network.name
-  region        = var.gcp_region
+resource "google_compute_address" "gcp-ip" {
+  name   = "gcp-vm-ip"
+  region = var.gcp_region
 }
 
+resource "google_compute_address" "gcp-ip2" {
+  name   = "gcp-vm-ip2"
+  region = var.gcp_region
+}
+
+resource "google_compute_address" "gcp-ip3" {
+  name   = "gcp-vm-ip3"
+  region = var.gcp_region2
+}
+
+resource "google_compute_address" "gcp-ip4" {
+  name   = "gcp-vm-ip4"
+  region = var.gcp_region2
+}
 
 

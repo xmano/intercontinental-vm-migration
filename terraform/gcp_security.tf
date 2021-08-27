@@ -10,13 +10,15 @@
  * Terraform security (firewall) resources for GCP.
  */
 
-# Allow PING testing.
-resource "google_compute_firewall" "gcp-allow-icmp" {
-  name    = "${google_compute_network.tcb-gcp-network.name}-gcp-allow-icmp"
-  network = google_compute_network.tcb-gcp-network.name
+
+# Allow SSH for iperf testing.
+resource "google_compute_firewall" "gcp-allow-ssh" {
+  name    = "${google_compute_network.i18n-gcp-network.name}-gcp-allow-ssh"
+  network = google_compute_network.i18n-gcp-network.name
 
   allow {
-    protocol = "icmp"
+    protocol = "tcp"
+    ports    = ["22"]
   }
 
   source_ranges = [
@@ -24,14 +26,14 @@ resource "google_compute_firewall" "gcp-allow-icmp" {
   ]
 }
 
-# Allow SSH for iperf testing.
-resource "google_compute_firewall" "gcp-allow-ssh" {
-  name    = "${google_compute_network.tcb-gcp-network.name}-gcp-allow-ssh"
-  network = google_compute_network.tcb-gcp-network.name
+# Allow TCP:3000 for App access
+resource "google_compute_firewall" "gcp-allow-tcp" {
+  name    = "${google_compute_network.i18n-gcp-network.name}-allow-app-port-3000"
+  network = google_compute_network.i18n-gcp-network.name
 
   allow {
     protocol = "tcp"
-    ports    = ["22"]
+    ports    = ["3000"]
   }
 
   source_ranges = [

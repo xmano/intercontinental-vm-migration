@@ -9,6 +9,7 @@
 
 /*
  * Terraform variable declarations for GCP.
+ * Final values of var can be defined in terraform.tfvars
  */
 
 variable "gcp_credentials_file_path" {
@@ -26,6 +27,21 @@ variable "gcp_region" {
   default     = "us-west1"
 }
 
+variable "gcp_zone" {
+  description = "Default to Oregon region."
+  default     = "us-west1-b"
+}
+
+variable "gcp_region2" {
+  description = "Default to Sydney region."
+  default     = "australia-southeast1"
+}
+
+variable "gcp_zone2" {
+  description = "Default to Sydney region."
+  default     = "australia-southeast1-a"
+}
+
 variable "gcp_instance_type" {
   description = "Machine Type. Correlates to an network egress cap."
   default     = "e2-micro"
@@ -33,7 +49,7 @@ variable "gcp_instance_type" {
 
 variable "gcp_disk_image" {
   description = "Boot disk for gcp_instance_type."
-  default     = "projects/ubuntu-os-cloud/global/images/family/ubuntu-1604-lts"
+  default     = "debian-cloud/debian-10"
 }
 
 variable "gcp_network_cidr" {
@@ -47,6 +63,16 @@ variable "gcp_subnet1_cidr" {
 variable "gcp_vm_address" {
   description = "Private IP address for GCP VM instance."
   default     = "10.88.0.100"
+}
+
+variable "gce_ssh_pub_key_file" {
+  description = "Location of SSH public key file"
+  default     = "~/.ssh/id_rsa.pub"
+}
+
+variable "gce_ssh_user" {
+  description = "User loggin in via SSH - username"
+  default     = "xkandacloud"
 }
 
 

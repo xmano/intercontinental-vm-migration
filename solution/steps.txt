@@ -38,8 +38,11 @@ source bootcamp-gcp-storage-db-en.sql
 Creating an user and changing the privileges
 --------------------------------------------
 CREATE USER app@'%' IDENTIFIED BY 'welcome1';
+
 GRANT ALL PRIVILEGES ON clinic.* TO app@'%';
+
 FLUSH PRIVILEGES;
+
 exit
 
 
@@ -56,5 +59,36 @@ sudo apt-get install -y wget
 
 Creating and accessing the folder to download application files (Node.js)
 
-wget https://storage.googleapis.com/bootcamp-gcp-en/bootcamp-gcp-storage-clinic-mid-app.zipunzip bootcamp-gcp-storage-clinic-mib-app.zipcd bootcamp-gcp-storage-clinic-mib-appFromthefolderbootcamp-gcp-storage-clinic-mid-app,runthefollowingcommandtoeditthefileindex.jsnano src/index.jsOnceinsideofthefileindex.js, intheMiddlewaressection,replace:
+wget https://storage.googleapis.com/bootcamp-gcp-en/bootcamp-gcp-storage-clinic-mid-app.zip
+
+unzip bootcamp-gcp-storage-clinic-mib-app.zip
+
+cd bootcamp-gcp-storage-clinic-mib-app
+
+From the folder bootcamp-gcp-storage-clinic-mid-app, run the following command 
+to edit the file index.js 
+
+vi src/index.js
+
+Onceinsideofthefileindex.js, intheMiddlewaressection,replace:
+
+
+
+//Create snapshot disks:
+
+//For DB
+gcloud compute disks snapshot usa-db-01 --snapshot-names usa-db-01-snapshot --zone us-west1-b
+
+//For App
+gcloud compute disks snapshot usa-app-01 --snapshot-names usa-app-01-snapshot --zone us-west1-b
+
+
+
+// Create disk in other zone:
+
+//For DB
+gcloud compute disks create aus-db-01 --source-snapshot usa-db-01-snapshot --zone australia-southeast1-a
+
+//For App
+gcloud compute disks create aus-app-01 --source-snapshot usa-app-01-snapshot --zone australia-southeast1-a
 
